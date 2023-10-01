@@ -1,0 +1,32 @@
+* {
+    box-sizing: border-box;
+}
+  
+.column {
+    float: left;
+    padding: 0px;
+}
+  
+.left {
+    width: 50%;
+}
+  
+.right {
+    width: 50%;
+    text-align: right;
+    padding: 20px 50px;
+}
+  
+.row:after {
+    content: "";
+    display: table;
+    clear: both;
+}
+
+.pagination {
+    position: fixed;
+    left: 0;
+    bottom: 10px;
+    width: 100%;
+    text-align: center;
+}

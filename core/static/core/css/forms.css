@@ -1,0 +1,52 @@
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+form {
+    margin: 30px;
+}
+
+fieldset {
+    width: 23%;
+    padding: 0 25px;
+}
+
+#error {
+    background-color: red; 
+    color: white;
+    text-align: center;
+    width: 56%;
+    margin-left: 10px;
+}
+
+.errorlist {
+    color: red;
+    list-style-type: none;
+    padding: 0px;
+}
+
+#delete {
+    background-color: red;
+    color: white;
+    float: right;
+}
+
+h2 {
+    text-align: center;
+    text-decoration: underline;
+}
+
+#info {
+    text-align: center;
+    font-size: large;
+}
+
+#book_list {
+    text-align: left;
+}
+
+a {
+    text-decoration: none;
+}

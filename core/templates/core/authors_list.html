@@ -1,0 +1,73 @@
+{% extends 'core/base.html' %}
+{% load static %}
+
+{% block css %} 
+    <link rel="stylesheet" type="text/css" href="{% static 'core/css/base_style.css' %}"> 
+    <link rel="stylesheet" type="text/css" href="{% static 'core/css/lists.css' %}"> 
+{% endblock %}    
+{% block title %} Authors' List {% endblock %}
+
+{% block left-content %}
+    {% if messages %}
+        {% for message in messages %}
+            {% if message.level == DEFAULT_MESSAGE_LEVELS.SUCCESS %}
+                <p id="success">{{message}}</p>
+
+            {% elif message.level == DEFAULT_MESSAGE_LEVELS.ERROR %}
+                <p id="error">{{message}}</p>
+
+            {% else %}
+                <p id="warning">{{message}}</p>
+            {% endif %}
+        {% endfor %}
+    {% endif %}
+      
+    <ol>
+        {% for author, value in authors_data.items %}
+            <li>
+                <a href="{% url 'update-author' author.id %}">{{author}}</a> 
+                - <b>Number of Books:</b> {{value.num_of_books}} - <b>Average Price:</b> {{value.books_avg_price}}€
+                
+                <ul style="list-style-type:disc;">
+                    {% for book in value.books %}
+                        <li>
+                            <a href="{% url 'update-book' book.id %}">"{{book}}"</a> - <b>Category:</b> {{book.category}} - <b>Price:</b> {{book.price}}€
+                        </li>    
+                    {% endfor %}     
+                </ul> 
+            </li><br>
+        {% endfor %}    
+    </ol> 
+{% endblock %}
+
+{% block right-content %}
+    <form role="search" action="{% url 'search-results' %}" method="get">
+        <input type="search" name="search" placeholder="Search.....">
+
+        <select id="search_choice" name="search_choice" style="height: 21px;">
+            <option value="author">Author</option>
+            <option value="book">Book</option>
+        </select>
+
+        <button class="search" type="submit">
+            <i class="fa fa-search"></i>
+        </button><br>
+    </form>
+
+    <div class="buttons" style="padding-top: 10px; display: block;">
+        <a href="{% url 'create-author' %}"> <button type="button">New Author</button> </a>
+        <a href="{% url 'create-book' %}"> <button type="button">New Book</button> </a>
+    </div>
+{% endblock %}
+        
+{% block javascript %}
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script>
+        $(document).ready(function(){
+            $('p').fadeOut(10000);
+            $('error').fadeOut(10000);
+            $('warning').fadeOut(10000);
+        });
+    </script>
+{% endblock %}
+    

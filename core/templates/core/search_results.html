@@ -1,0 +1,54 @@
+{% extends 'core/base.html' %}
+{% load static %}
+
+{% block css %} 
+    <link rel="stylesheet" type="text/css" href="{% static 'core/css/base_style.css' %}"> 
+    <link rel="stylesheet" type="text/css" href="{% static 'core/css/lists.css' %}"> 
+{% endblock %}    
+{% block title %} Search Results {% endblock %}
+
+{% block left-content %}
+    <h2 style="text-align:center;">{{message}}</h2>
+    
+    {% if authors_set %}
+        <ol>
+            {% for author, values in authors_set.items %}
+                <li>
+                    <a href="{% url 'update-author' author.id %}">{{author}}</a> - <b>Number of Books:</b> {{values.num_of_books}} - 
+                    <b>Average Price:</b> {{values.books_avg_price}}€
+                </li>
+            {% endfor %}
+        </ol>
+
+    {% elif books_set %}
+        <ol>
+            {% for book in books_set %}
+                <li>
+                    <a href="{% url 'update-book' book.id %}">{{book}}</a> - <b>Category:</b> {{book.category}} - 
+                    <b>Author:</b> <a href="{% url 'update-author' book.author_id %}">{{book.author}}</a> - <b>Price:</b> {{book.price}}€ 
+                </li>
+            {% endfor %}
+        </ol>
+    {% endif %}
+{% endblock %}
+
+{% block right-content %}
+    <form role="search" action="{% url 'search-results' %}" method="get">
+        <input type="search" name="search" placeholder="Search.....">
+
+        <select id="search_choice" name="search_choice" style="height: 21px;">
+            <option value="author">Author</option>
+            <option value="book">Book</option>
+        </select>
+
+        <button class="search" type="submit">
+            <i class="fa fa-search"></i>
+        </button><br>
+    </form>
+
+    <div class="buttons" style="padding-top: 10px; display: block;">
+        <a href="{% url 'authors-list' %}"> <button type="button">Authors' List</button> </a>
+        <a href="{% url 'create-author' %}"><button type="button">New Author</button> </a>
+        <a href="{% url 'create-book' %}"><button type="button">New Book</button> </a>
+    </div>
+{% endblock %}

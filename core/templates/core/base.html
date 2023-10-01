@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css" 
+        integrity="sha384-DyZ88mC6Up2uqS4h/KRgHuoeGwBcD4Ng9SiP4dIRy0EXTlnuz47vAwmeGwVChigm" crossorigin="anonymous"/>
+
+        {% block css %}{% endblock %}
+        <title>{% block title %}{% endblock %}</title>
+    </head>
+
+    <body>
+        <div class="row">
+            <div class="column left">
+                <ol>
+                    {% block left-content %}{% endblock %}
+                </ol>
+            </div>
+
+            <div class="column right">
+                {% block right-content %}{% endblock %}
+            </div>
+        </div>
+
+        {% block javascript %}{% endblock %}
+    </body>
+</html>

@@ -1,0 +1,24 @@
+#success {
+    background-color: aquamarine; 
+    color: red;
+    text-align: center;
+    width: 80%;
+}
+
+#error {
+    background-color: red; 
+    color: white;
+    text-align: center;
+    width: 80%;
+}
+
+#warning {
+    background-color: orange; 
+    color: white;
+    text-align: center;
+    width: 80%;
+}
+
+a {
+    text-decoration: none;
+}

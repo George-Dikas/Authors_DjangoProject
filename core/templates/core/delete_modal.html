@@ -1,0 +1,36 @@
+<div id="delete_modal" class="modal">
+    <span onclick="document.getElementById('delete_modal').style.display='none'" class="close" title="Close Modal">×</span>
+    <form   class="modal-content" 
+        
+            {% if delete_modal_title == 'Delete Author' %}
+                action="{% url 'delete-author' author_id %}"
+                        
+            {% else %}
+                action="{% url 'delete-book' book.id %}"
+                    
+            {% endif %}
+    
+            method="get">
+        {% csrf_token %}
+        <div class="container">
+            <h1>{{delete_modal_title}}</h1>
+            <p>{{delete_modal_message}}</p>
+        
+            <div class="clearfix">
+                <button type="submit" class="yes_btn">Yes</button>
+                <button type="button" onclick="document.getElementById('delete_modal').style.display='none'" class="no_btn">No</button>
+            </div>
+        </div>
+    </form>
+</div>
+
+<script>
+    var modal = document.getElementById('delete_modal');
+
+    window.onclick = function(event) {
+        if (event.target == modal) {
+            modal.style.display = "none";
+        }
+    }
+</script>
+

@@ -1,0 +1,64 @@
+<!-- For Create and Update book pages  -->
+
+{% extends 'core/base.html' %}
+{% load static %}
+
+{% block css %} 
+    <link rel="stylesheet" type="text/css" href="{% static 'core/css/base_style.css' %}"> 
+    <link rel="stylesheet" type="text/css" href="{% static 'core/css/forms.css' %}"> 
+    <link rel="stylesheet" type="text/css" href="{% static 'core/css/delete_modal.css' %}"> 
+{% endblock %}    
+{% block title %} {{page_title}} {% endblock %}
+
+{% block left-content %}
+    {% if messages %}
+        {% for message in messages %}
+            <p id="error">{{message}}</p>
+        {% endfor %}
+    {% endif %}
+
+    <form action="" method="post">
+        <fieldset>
+            <legend><b>{{legend_tag}}</b></legend>
+            {% csrf_token %}
+            
+            {% for error in form.non_field_errors %}
+                {{error}}
+            {% endfor %}
+            {% for field in form %}
+                <p>{{field.label_tag}} {{field}} {{field.errors}}<p>
+            {% endfor %}
+
+            <input type="submit" value="Submit">
+            <a href="{% url 'authors-list' %}"> <button type="button">Authors' List</button> </a>
+
+            {% if legend_tag == 'Update Book' %}
+                <button type="button" id="delete" onclick="document.getElementById('delete_modal').style.display='block'">Delete</button>
+            {% endif %}
+        </fieldset>
+    </form>
+
+    {% if legend_tag == 'Update Book' %}
+        {% include 'core/delete_modal.html' %} 
+    {% endif %}
+{% endblock %}
+
+{% block right-content %}
+    {% if page_title == 'Update Book' %}
+        <h2>Book's Information</h2>
+        <div id="info">
+            <p><b>Title:</b> {{book.title}}</p>
+            <p><b>Author:</b> <a href="{% url 'update-author' book.author.id %}">{{book.author}}</a> | <b>Category:</b> {{book.category}}</p>
+            <p><b>Publication Date:</b> {{book.pub_date}}</a> | <b>Price:</b> {{book.price}}</p>
+        </p>
+    {% endif %}
+{% endblock %}
+
+{% block javascript %}
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script>
+        $(document).ready(function(){
+            $('#error').fadeOut(10000);
+        });
+    </script>
+{% endblock %}
